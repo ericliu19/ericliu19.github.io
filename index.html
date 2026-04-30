@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eric Liu — Medical Student & Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #F7F7F5;
+    --bg-card:   #FFFFFF;
+    --green:     #3B6D11;
+    --green-light: #EAF3DE;
+    --green-mid: #639922;
+    --green-dark: #27500A;
+    --text:      #1C1C1A;
+    --muted:     #5F5E5A;
+    --hint:      #888780;
+    --border:    rgba(0,0,0,0.09);
+    --border-md: rgba(0,0,0,0.14);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247,247,245,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2.5rem;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-name {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 7rem 2.5rem 5rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 1.75rem;
+    letter-spacing: 0.03em;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green-mid);
+  }
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(40px, 6vw, 60px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-green {
+    background: var(--green);
+    color: #EAF3DE;
+  }
+  .btn-green:hover { opacity: 0.88; }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 0.5px solid var(--border-md);
+  }
+  .btn-outline:hover { background: rgba(0,0,0,0.04); }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem;
+  }
+  .section + .section { padding-top: 0; }
+  hr.divider {
+    max-width: 760px;
+    margin: 0 auto;
+    border: none;
+    border-top: 0.5px solid var(--border);
+    padding: 0 2.5rem;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+
+  /* ── PROJECT CARDS ── */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .project-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover { border-color: var(--green-mid); }
+  .project-tag {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+  .project-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    line-height: 1.35;
+  }
+  .project-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .project-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green-mid);
+    text-decoration: none;
+  }
+  .project-link:hover { color: var(--green-dark); }
+
+  /* ── ABOUT ── */
+  .about-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 0.5px solid rgba(59,109,17,0.2);
+  }
+  .about-body h3 {
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  .about-body p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 12px;
+    color: var(--green-dark);
+    background: var(--green-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* ── CALCULATOR SECTION ── */
+  .calc-section {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .calc-intro { margin-bottom: 1.5rem; }
+  .calc-intro h3 {
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .calc-intro p { font-size: 14px; color: var(--muted); }
+  .field-group-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--hint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1.25rem 0 0.75rem;
+  }
+  .field-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 12px; color: var(--muted); }
+  .field input, .field select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 0.5px solid var(--border-md);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .field input:focus, .field select:focus { border-color: var(--green-mid); }
+  .field .unit { font-size: 11px; color: var(--hint); }
+  .result-box {
+    margin-top: 1.75rem;
+    background: var(--green-light);
+    border: 0.5px solid rgba(59,109,17,0.2);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+  }
+  .result-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .result-label { font-size: 13px; color: var(--green-dark); margin-bottom: 4px; }
+  .result-value { font-family: 'Lora', serif; font-size: 44px; font-weight: 500; color: var(--green-dark); line-height: 1; }
+  .result-interp { font-size: 14px; font-weight: 500; }
+  .bar-wrap { margin-top: 1rem; }
+  .bar-bg { height: 6px; background: rgba(59,109,17,0.15); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; background: var(--green-mid); transition: width 0.3s ease; }
+  .result-meta { margin-top: 0.75rem; font-size: 11px; color: var(--green); opacity: 0.7; }
+  .disclaimer {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: #FFF8E6;
+    border: 0.5px solid #EF9F27;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #633806;
+    line-height: 1.5;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .contact-card {
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .contact-card:hover { border-color: var(--green-mid); }
+  .contact-card-label { font-size: 11px; color: var(--hint); margin-bottom: 4px; }
+  .contact-card-value { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem 2.5rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--hint);
+  }
+  footer a { color: var(--green-mid); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero, .section { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .hero { padding-top: 4rem; }
+    .about-card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Eric Liu</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-eyebrow">Medical student &middot; researcher</span>
+  <h1>Eric <em>Liu</em></h1>
+  <p class="hero-sub">
+    Medical student with an interest in clinical research, data science, and building tools that improve patient care. Currently developing predictive models in urology.
+  </p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-green">View projects</a>
+    <a href="#contact" class="btn btn-outline">Get in touch</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<hr class="divider">
+<div class="section" id="about">
+  <div class="section-label">About</div>
+  <div class="about-card">
+    <div class="avatar">EL</div>
+    <div class="about-body">
+      <h3>Eric Liu</h3>
+      <p>
+        I'm a medical student interested in the intersection of clinical medicine and data science. I build open-source tools for clinicians and work on research projects in urology and surgical outcomes.
+        This site documents my projects and research.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Clinical research</span>
+        <span class="tag">Data science</span>
+        <span class="tag">Urology</span>
+        <span class="tag">Predictive modelling</span>
+        <span class="tag">R</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<hr class="divider">
+<div class="section" id="projects">
+  <div class="section-label">Projects</div>
+  <div class="project-grid">
+    <div class="project-card">
+      <span class="project-tag">Clinical tool</span>
+      <h3>ESWL success predictor</h3>
+      <p>Nomogram-based calculator predicting the probability of successful stone fragmentation from pre-procedure clinical and radiological data across 343 procedures.</p>
+      <a href="#calculator" class="project-link">Try the calculator →</a>
+    </div>
+    <div class="project-card">
+      <span class="project-tag">Research</span>
+      <h3>Predictors of ESWL success</h3>
+      <p>Multivariable logistic regression analysis identifying CT density and stone location as independent predictors of ESWL success, with bootstrap internal validation (C = 0.693).</p>
+      <a href="#" class="project-link">Read more →</a>
+    </div>
+    <div class="project-card">
+      <span class="project-tag">Coming soon</span>
+      <h3>Your next project</h3>
+      <p>Add your projects here as you build them. Each card links to a live tool, paper, or write-up.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<hr class="divider">
+<div class="section" id="calculator">
+  <div class="section-label">ESWL success calculator</div>
+  <div class="calc-section">
+    <div class="calc-intro">
+      <h3>Predict ESWL success probability</h3>
+      <p>Enter pre-procedure patient and stone characteristics to estimate the probability of successful fragmentation. Based on a multivariable logistic regression model (n = 343, C = 0.693).</p>
+    </div>
+
+    <div class="field-group-label">Patient characteristics</div>
+    <div class="field-grid">
+      <div class="field">
+        <label for="age">Age</label>
+        <input type="number" id="age" min="18" max="100" value="55" step="1">
+        <span class="unit">years</span>
+      </div>
+      <div class="field">
+        <label for="sex">Sex</label>
+        <select id="sex">
+          <option value="0">Female</option>
+          <option value="1">Male</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="bmi">BMI</label>
+        <input type="number" id="bmi" min="15" max="60" value="26" step="0.1">
+        <span class="unit">kg/m²</span>
+      </div>
+    </div>
+
+    <div class="field-group-label">Stone characteristics</div>
+    <div class="field-grid">
+      <div class="field">
+        <label for="location">Stone location</label>
+        <select id="location">
+          <option value="0">Kidney</option>
+          <option value="1">Ureter</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="stone_size">Stone size</label>
+        <input type="number" id="stone_size" min="1" max="30" value="8" step="0.5">
+        <span class="unit">mm</span>
+      </div>
+      <div class="field">
+        <label for="ct_density">CT density</label>
+        <input type="number" id="ct_density" min="100" max="1800" value="800" step="10">
+        <span class="unit">Hounsfield units (HU)</span>
+      </div>
+      <div class="field">
+        <label for="skin_stone">Skin-to-stone distance</label>
+        <input type="number" id="skin_stone" min="1" max="30" value="11" step="0.1">
+        <span class="unit">cm</span>
+      </div>
+    </div>
+
+    <div class="result-box">
+      <div class="result-row">
+        <div>
+          <div class="result-label">P(ESWL success)</div>
+          <div class="result-value" id="prob-display">—</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="result-label">Interpretation</div>
+          <div class="result-interp" id="interp-text" style="color: var(--green-dark);">—</div>
+        </div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-bg"><div class="bar-fill" id="prob-bar" style="width:0%"></div></div>
+      </div>
+      <div class="result-meta">Model: logistic regression · n=343 · bootstrap-corrected C=0.693 · MAE=0.023</div>
+    </div>
+
+    <div class="disclaimer">
+      For research and educational purposes only. This tool has not been externally validated and should not replace clinical judgement. Do not use for individual patient management decisions without appropriate clinical context.
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<hr class="divider">
+<div class="section" id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-grid">
+    <a href="mailto:your@email.com" class="contact-card">
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">your@email.com</div>
+    </a>
+    <a href="https://github.com/yourusername" class="contact-card" target="_blank">
+      <div class="contact-card-label">GitHub</div>
+      <div class="contact-card-value">github.com/yourusername</div>
+    </a>
+    <a href="https://linkedin.com/in/yourusername" class="contact-card" target="_blank">
+      <div class="contact-card-label">LinkedIn</div>
+      <div class="contact-card-value">linkedin.com/in/yourusername</div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Eric Liu &middot; <a href="https://github.com/yourusername">GitHub</a> &middot; Built with GitHub Pages</p>
+</footer>
+
+<script>
+  const INTERCEPT = 3.0799;
+  const COEF = {
+    age:        -0.0076,
+    sex_male:    0.0074,
+    bmi:        -0.0104,
+    loc_ureter:  0.7293,
+    stone_size: -0.1043,
+    ct_density: -0.0200,
+    skin_stone: -0.0513
+  };
+
+  function plogis(x) { return 1 / (1 + Math.exp(-x)); }
+
+  function calculate() {
+    const age      = parseFloat(document.getElementById('age').value) || 0;
+    const sex      = parseFloat(document.getElementById('sex').value);
+    const bmi      = parseFloat(document.getElementById('bmi').value) || 0;
+    const location = parseFloat(document.getElementById('location').value);
+    const stone    = parseFloat(document.getElementById('stone_size').value) || 0;
+    const ctRaw    = parseFloat(document.getElementById('ct_density').value) || 0;
+    const skin     = parseFloat(document.getElementById('skin_stone').value) || 0;
+    const ct       = ctRaw / 10;
+
+    const logodds = INTERCEPT
+      + COEF.age        * age
+      + COEF.sex_male   * sex
+      + COEF.bmi        * bmi
+      + COEF.loc_ureter * location
+      + COEF.stone_size * stone
+      + COEF.ct_density * ct
+      + COEF.skin_stone * skin;
+
+    const prob = plogis(logodds);
+    const pct  = (prob * 100).toFixed(1);
+
+    document.getElementById('prob-display').textContent = pct + '%';
+    document.getElementById('prob-bar').style.width = pct + '%';
+
+    let label;
+    if      (prob < 0.3) label = 'Low likelihood';
+    else if (prob < 0.5) label = 'Below average';
+    else if (prob < 0.7) label = 'Moderate likelihood';
+    else                 label = 'High likelihood';
+
+    document.getElementById('interp-text').textContent = label;
+  }
+
+  ['age','sex','bmi','location','stone_size','ct_density','skin_stone'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calculate);
+  });
+
+  calculate();
+</script>
+</body>
+</html>
